@@ -4,7 +4,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
 	title: "Placidity-UI",
 	description: "A document for my UI repository Placidity.",
-	base: "/placidity/",
+	base: "/Placidity/",
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
