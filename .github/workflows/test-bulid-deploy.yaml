@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: docs
-          path: ./packages/docs/.vitepress/dist
+          path: ./packages/docs/docs/.vitepress/dist
 
   deploy:
     name: Deploy to GitHub Pages
