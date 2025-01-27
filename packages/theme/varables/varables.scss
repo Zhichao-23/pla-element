@@ -1,0 +1,60 @@
+$types: (
+	primary: #409eff,
+	success: #67c23a,
+	warning: #e6a23c,
+	danger: #f56c6c,
+	info: #909399,
+);
+
+:root {
+	color-scheme: light;
+	--pla-color-primary: #409eff;
+	--pla-color-success: #67c23a;
+	--pla-color-warning: #e6a23c;
+	--pla-color-danger: #f56c6c;
+	--pla-color-error: #f56c6c;
+	--pla-color-info: #909399;
+
+	@each $type, $val in $types {
+		--pla-color-#{$type}-3: #{mix(#ffffff, $val, 30%)};
+		--pla-color-#{$type}-5: #{mix(#ffffff, $val, 50%)};
+		--pla-color-#{$type}-7: #{mix(#ffffff, $val, 70%)};
+		--pla-color-#{$type}-8: #{mix(#ffffff, $val, 80%)};
+		--pla-color-#{$type}-9: #{mix(#ffffff, $val, 90%)};
+		--pla-color-#{$type}-dark-2: #{mix(#000000, $val, 20%)};
+	}
+
+	--pla-bg-color: #ffffff;
+	--pla-bg-color-page: #f2f3f5;
+	--pla-bg-color-overlay: #ffffff;
+
+	--pla-text-color: #303133;
+	--pla-text-color-placeholder: #a8abb2;
+	--pla-text-color-disabled: #c0c4cc;
+
+	--pla-border-color: #dcdfe6;
+
+	--pla-fill-color: #f0f2f5;
+
+	--pla-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+		0px 8px 20px rgba(0, 0, 0, 0.08);
+
+	// disabled系列
+	--pla-disabled-bg-color: var(--pla-fill-color-light);
+	--pla-disabled-text-color: var(--pla-text-color-placeholder);
+	--pla-disabled-border-color: var(--pla-border-color-light);
+
+	--pla-overlay-color: rgba(0, 0, 0, 0.8);
+
+	--pla-mask-color: rgba(255, 255, 255, 0.9);
+
+	// border系列
+	--pla-border-width: 1px;
+	--pla-border-style: solid;
+	--pla-border-color: #ebeef5;
+	--pla-border-color-hover: var(--pla-text-color-disabled);
+	--pla-border: var(--pla-border-width) var(--pla-border-style)
+		var(--pla-border-color);
+
+	--pla-transition-duration: 0.3s;
+}

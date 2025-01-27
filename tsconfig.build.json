@@ -1,5 +1,4 @@
 {
-	"extends": "@vue/tsconfig/tsconfig.dom.json",
 	"compilerOptions": {
 		"target": "ES2020",
 		"useDefineForClassFields": true,
@@ -22,5 +21,11 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["packages/**/*.ts", "packages/**/*.tsx", "packages/**/*.vue", "packages/components/vitest.config.ts"]
+	"include": [
+		"packages/core/index.ts",
+		"packages/hooks/**/*.ts",
+		"packages/utils/**/*.ts",
+		"packages/components/**/*.ts",
+		"packages/components/**/*.vue"
+	]
 }

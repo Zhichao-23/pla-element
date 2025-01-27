@@ -1,0 +1,110 @@
+@use "@placidity/theme/varables/types.scss" as *;
+@use "@placidity/theme/varables/states.scss" as *;
+
+.pla-button {
+	--pla-button-text-color: #fff;
+	--pla-button-border-color: var(--pla-color-primary);
+	--pla-button-bg-color: var(--pla-color-primary);
+}
+.pla-button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 1;
+	height: 32px;
+	font-weight: 600;
+	background-color: var(--pla-button-bg-color);
+	white-space: nowrap;
+	cursor: pointer;
+	color: var(--pla-button-text-color);
+	text-align: center;
+	box-sizing: border-box;
+	padding: 8px 16px;
+	outline: none;
+	transition: 0.1s;
+	-webkit-user-select: none;
+	user-select: none;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	appearance: none;
+	border: var(--pla-border);
+	border-color: var(--pla-button-border-color);
+	& + .pla-button {
+		margin-left: 8px;
+	}
+
+	@each $type in $types {
+		&.pla-button--#{$type} {
+			--pla-button-bg-color: var(--pla-color-#{$type});
+			--pla-button-border-color: var(--pla-color-#{$type});
+			&:hover {
+				--pla-button-bg-color: var(--pla-color-#{$type}-3);
+				--pla-button-border-color: var(--pla-color-#{$type}-3);
+			}
+			&:active {
+				--pla-button-bg-color: var(--pla-color-#{$type}-dark-2);
+				--pla-button-border-color: var(--pla-color-#{$type}-dark-2);
+			}
+			&:disabled {
+				--pla-button-bg-color: var(--pla-color-#{$type}-8);
+				--pla-button-border-color: var(--pla-color-#{$type}-8);
+				color: var(--pla-disabled-text-color);
+			}
+			&.is-plain {
+				--pla-button-text-color: var(--pla-color-#{$type});
+				--pla-button-bg-color: var(--pla-color-#{$type}-7);
+				--pla-button-border-color: var(--pla-color-#{$type});
+				&:hover {
+					--pla-button-text-color: #fff;
+					--pla-button-bg-color: var(--pla-color-#{$type});
+					--pla-button-border-color: var(--pla-color-#{$type});
+				}
+				&:active {
+					--pla-button-text-color: #fff;
+					--pla-button-bg-color: var(--pla-color-#{$type}-dark-2);
+					--pla-button-border-color: var(--pla-color-#{$type});
+				}
+			}
+		}
+	}
+	&.is-round {
+		border-radius: 4px;
+	}
+
+	&.is-circle {
+		border-radius: 50%;
+	}
+
+	&.is-loading {
+		.pla-button__loading-icon {
+			animation: loading 1s infinite linear;
+		}
+	}
+}
+
+@keyframes loading {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.pla-button-group {
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	.pla-button {
+		border-radius: 0;
+		margin-left: 0 !important;
+		&:first-child {
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+		&:last-child {
+			border-top-right-radius: 4px;
+			border-bottom-right-radius: 4px;
+		}
+	}
+}

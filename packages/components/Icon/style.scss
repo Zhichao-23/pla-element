@@ -1,0 +1,15 @@
+@use "@placidity/theme/varables/types.scss" as *;
+.pla-icon {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	fill: currentColor;
+	color: #fff;
+	font-size: inherit;
+
+	@each $type in $types {
+		&.pla-icon--#{$type} {
+			color: var(--pla-color-#{$type});
+		}
+	}
+}
