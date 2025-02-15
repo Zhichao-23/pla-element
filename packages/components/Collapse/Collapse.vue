@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { provide, reactive, toRef, watch, watchEffect } from "vue";
+import { provide, reactive, ref, toRef, watch, watchEffect } from "vue";
 import type { CollapseEmits, CollapseProps } from "./types";
-import { isArray } from "lodash-es";
 import { COLLASPES_CTX_KEY } from "./contants";
+import { debugWarn } from "@pla-element/utils";
+import { filter, indexOf } from "lodash-es";
+
+const COMP_NAME = "pla-collapse";
 
 defineOptions({
-	name: "pla-collapse",
+	name: COMP_NAME,
 });
 
 const props = withDefaults(defineProps<CollapseProps>(), {
@@ -14,15 +17,11 @@ const props = withDefaults(defineProps<CollapseProps>(), {
 
 const emits = defineEmits<CollapseEmits>();
 
-// activeNames和modelValue已经同步，不需要使用watch侦听
-const activeNames = toRef(props, "modelValue");
+const activeNames = ref(props.modelValue);
 
 watchEffect(() => {
-	if (props.accordion && isArray(activeNames)) {
-		console.warn(
-			"[pla-collapse]",
-			"modelvalue should be an string in accordion mode"
-		);
+	if (props.accordion && activeNames.value.length > 1) {
+		debugWarn(COMP_NAME, "accordion mode just has one item in modelValue");
 	}
 });
 
@@ -34,20 +33,34 @@ watch(
 	}
 );
 
+const updateActiveNames = (newVal: string[]) => {
+	activeNames.value = newVal;
+};
+
 const handleItemClick = (itemName: string) => {
-	if (props.accordion) emits("update:modelValue", itemName);
-	else {
-		if (!isArray(activeNames.value)) return;
-		const index = activeNames.value.indexOf(itemName);
-		console.log(index);
-		if (index == -1) {
-			emits("update:modelValue", [...activeNames.value, itemName]);
+	// accodiomn mode
+	if (props.accordion) {
+		if (indexOf(activeNames.value, itemName) !== -1) {
+			const newVal = [] as string[];
+			updateActiveNames(newVal);
+			emits("update:modelValue", newVal);
 		} else {
-			const _newActiveNames = activeNames.value.filter(
-				(name) => name !== itemName
-			);
-			emits("update:modelValue", _newActiveNames);
+			const newVal = [itemName];
+			updateActiveNames(newVal);
+			emits("update:modelValue", newVal);
 		}
+		return;
+	}
+	// default mode
+	const index = indexOf(activeNames.value, itemName);
+	if (index == -1) {
+		const newVal = [...activeNames.value, itemName];
+		updateActiveNames(newVal);
+		emits("update:modelValue", newVal);
+	} else {
+		const newVal = filter(activeNames.value, (name) => name !== itemName);
+		updateActiveNames(newVal);
+		emits("update:modelValue", newVal);
 	}
 };
 
@@ -68,6 +81,4 @@ const slots = defineSlots();
 	</div>
 </template>
 
-<style>
-@import "./style.scss";
-</style>
+<style src="./style.scss"></style>

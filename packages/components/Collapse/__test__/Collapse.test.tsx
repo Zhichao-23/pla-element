@@ -1,62 +1,56 @@
-import { mount, VueWrapper } from "@vue/test-utils";
-import { beforeEach, it, describe, expect, vi } from "vitest";
-import Collapse from "../Collapse.vue";
-import CollapseItem from "../CollapseItem.vue";
-import { ref, type ComponentPublicInstance } from "vue";
+import { expect, it, describe } from "vitest";
+import { mount } from "@vue/test-utils";
+import { PlaCollapse as Collapse, PlaCollapseItem as CollapseItem } from "..";
 
-describe("Collaspe", () => {
-	let wrapper: VueWrapper<ComponentPublicInstance>;
-	let useAccordion = false;
-	const handleChange = vi.fn();
-	const update = (newActiveNames: string[] | string) => {
-		activeNames.value = newActiveNames;
-	};
-	const activeNames = ref<string[] | string>([]);
-	beforeEach(() => {
-		wrapper = mount(() => (
-			<Collapse
-				onChange={handleChange}
-				modelValue={activeNames.value}
-				onUpdate:modelValue={update}
-				accordion={useAccordion}
-			>
-				<CollapseItem name={"a"}></CollapseItem>
-				<CollapseItem name={"b"}></CollapseItem>
-				<CollapseItem name={"c"} disabled></CollapseItem>
+function createWrapper() {
+	return mount(() => (
+		<Collapse modelValue={["1"]}>
+			<CollapseItem name="1"></CollapseItem>
+			<CollapseItem name="2"></CollapseItem>
+		</Collapse>
+	));
+}
+
+describe("Collapse", () => {
+	it("should have install", () => {
+		expect(Collapse.install).toBeDefined();
+	});
+
+	it("item1 expand defaultly", () => {
+		const wrapper = createWrapper();
+		expect(wrapper.findAllComponents(CollapseItem)[0].classes()).toContain(
+			"is-active"
+		);
+	});
+
+	it("item2 should expand when clicked", async () => {
+		const wrapper = createWrapper();
+		const titles = wrapper.findAll(".pla-collapse-item__header");
+		const items = wrapper.findAllComponents(CollapseItem);
+		await titles[1].trigger("click");
+		expect(items[1].classes()).contain("is-active");
+	});
+
+	it("should expand only one when accordion mode", async () => {
+		const wrapper = mount(() => (
+			<Collapse modelValue={["1"]} accordion>
+				<CollapseItem name="1"></CollapseItem>
+				<CollapseItem name="2"></CollapseItem>
 			</Collapse>
 		));
+		const titles = wrapper.findAll(".pla-collapse-item__header");
+		await titles[1].trigger("click");
+		expect(wrapper.findAll(".is-active")).toHaveLength(1);
 	});
 
-	it("CollaspeItems should be rendered properly", () => {
-		expect(wrapper.findAllComponents(CollapseItem).length).toBe(3);
-		expect(
-			wrapper
-				.findComponent({ name: "pla-collapse-item", props: { disabled: true } })
-				.exists()
-		).toBe(true);
-	});
-
-	it("The CollaspeItem clicked should expand", async () => {
+	it("item2 is disabled", () => {
+		const wrapper = mount(() => (
+			<Collapse modelValue={["1"]} accordion>
+				<CollapseItem name="1"></CollapseItem>
+				<CollapseItem name="2" disabled></CollapseItem>
+			</Collapse>
+		));
 		const items = wrapper.findAllComponents(CollapseItem);
-		const firstHeader = items[0].find(".pla-collapse-item__header");
-
-		await firstHeader.trigger("click");
-		expect(activeNames.value).toEqual(["a"]);
-		expect(handleChange).toHaveBeenCalledWith(["a"]);
-	});
-
-	useAccordion = true;
-	it("Accordions should be expanded properly", async () => {
-		const items = wrapper.findAllComponents(CollapseItem);
-		const firstHeader = items[0].find(".pla-collapse-item__header");
-		const secondHeader = items[1].find(".pla-collapse-item__header");
-
-		await secondHeader.trigger("click");
-		expect(activeNames.value).toEqual("b");
-		expect(handleChange).toHaveBeenCalledWith("b");
-
-		await firstHeader.trigger("click");
-		expect(activeNames.value).toEqual("a");
-		expect(handleChange).toHaveBeenCalledWith("a");
+		expect(items[1].classes()).toContain("is-disabled");
 	});
 });

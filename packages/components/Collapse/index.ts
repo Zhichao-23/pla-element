@@ -1,4 +1,6 @@
-import Callapse from "./Collapse.vue";
-import { withInstall } from "@placidity/utils/install";
-const PlaCallapse = withInstall(Callapse);
-export { PlaCallapse };
+import Collapse from "./Collapse.vue";
+import CollapseItem from "./CollapseItem.vue";
+import { withInstall } from "@pla-element/utils";
+const PlaCollapse = withInstall(Collapse);
+const PlaCollapseItem = withInstall(CollapseItem);
+export { PlaCollapse, PlaCollapseItem };

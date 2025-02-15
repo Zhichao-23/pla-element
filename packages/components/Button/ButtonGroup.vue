@@ -26,6 +26,4 @@ const slots = defineSlots();
 	</div>
 </template>
 
-<style lang="scss">
-@import "./style.scss";
-</style>
+<style src="./style.scss"></style>

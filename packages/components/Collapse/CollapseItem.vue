@@ -2,7 +2,7 @@
 import { computed, inject } from "vue";
 import type { CollapseContext, CollapseItemProps } from "./types";
 import { COLLASPES_CTX_KEY } from "./contants";
-import { includes, isArray, isEqual } from "lodash-es";
+import { includes } from "lodash-es";
 import PlaIcon from "../Icon/Icon.vue";
 import expandTransitionEvents from "./expandTransition";
 
@@ -18,11 +18,7 @@ const props = withDefaults(defineProps<CollapseItemProps>(), {
 const ctx = inject(COLLASPES_CTX_KEY) as CollapseContext;
 
 const isActive = computed(() => {
-	if (isArray(ctx.activeNames)) {
-		return includes(ctx.activeNames, props.name);
-	} else {
-		return isEqual(ctx.activeNames, props.name);
-	}
+	return includes(ctx.activeNames, props.name);
 });
 
 const handleClick = () => {
@@ -42,16 +38,14 @@ const slots = defineSlots();
 		}"
 	>
 		<div class="pla-collapse-item__header" @click="handleClick">
-			<span>{{ title }}</span>
+			<slot name="title">{{ title }}</slot>
 			<pla-icon
 				:icon="icon"
-				size="1x"
 				class="pla-collapse-item__icon"
 				v-if="icon"
 			></pla-icon>
 			<pla-icon
 				icon="angle-right"
-				size="1x"
 				class="pla-collapse-item__icon"
 				v-else
 			></pla-icon>
@@ -65,4 +59,3 @@ const slots = defineSlots();
 		</transition>
 	</div>
 </template>
-

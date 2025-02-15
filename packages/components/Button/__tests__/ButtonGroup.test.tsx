@@ -1,9 +1,12 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import ButtonGroup from "../ButtonGroup.vue";
+import { PlaButtonGroup as ButtonGroup } from "..";
 import Button from "../Button.vue";
 import type { ButtonSize, ButtonType } from "../types";
 describe("ButtonGroup.vue", () => {
+	it("should have install", () => {
+		expect(ButtonGroup.install).toBeDefined();
+	});
 	it("renders correctly with default props", () => {
 		const wrapper = mount(() => (
 			<ButtonGroup>
@@ -16,7 +19,7 @@ describe("ButtonGroup.vue", () => {
 	});
 
 	// 测试不同类型按钮的渲染
-	it("renders correctly with different types", () => {
+	it("renders different types", () => {
 		const types = [
 			"primary",
 			"success",
@@ -46,7 +49,7 @@ describe("ButtonGroup.vue", () => {
 		});
 	});
 
-	it("render correctly woth different sizes", () => {
+	it("render different sizes", () => {
 		const sizes: ButtonSize[] = ["default", "small", "large"];
 		sizes.forEach((size) => {
 			const wrapper = mount(ButtonGroup, {

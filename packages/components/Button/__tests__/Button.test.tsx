@@ -1,9 +1,12 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi } from "vitest";
-import Button from "../Button.vue";
+import { PlaButton as Button } from "..";
 import type { ButtonSize, ButtonType } from "../types";
 
 describe("Button.vue", () => {
+	it("should have install", () => {
+		expect(Button.install).toBeDefined();
+	});
 	// 测试默认属性渲染
 	it("renders correctly with default props", () => {
 		const wrapper = mount(Button);
@@ -60,6 +63,8 @@ describe("Button.vue", () => {
 
 	// 测试节流功能
 	it("handles click event with throttling", async () => {
+		vi.useFakeTimers();
+
 		const handleClick = vi.fn();
 		const wrapper = mount(() => (
 			<Button
@@ -70,18 +75,15 @@ describe("Button.vue", () => {
 		));
 
 		await wrapper.trigger("click");
-		expect(wrapper.emitted()).toHaveProperty("click");
-		expect(handleClick).toHaveBeenCalledTimes(1);
-
-		await new Promise((resolve) => setTimeout(resolve, 300));
+		expect(handleClick).toBeCalledTimes(1);
+		vi.advanceTimersByTime(300);
 		await wrapper.trigger("click");
-		expect((wrapper.emitted().click || []).length).toBe(2);
-		expect(handleClick).toHaveBeenCalledTimes(1);
-
-		await new Promise((resolve) => setTimeout(resolve, 600));
+		expect(handleClick).toBeCalledTimes(1);
+		vi.advanceTimersByTime(300);
 		await wrapper.trigger("click");
-		expect((wrapper.emitted().click || []).length).toBe(3);
-		expect(handleClick).toHaveBeenCalledTimes(2);
+		expect(handleClick).toBeCalledTimes(2);
+
+		vi.useRealTimers();
 	});
 
 	// 测试 loading 状态

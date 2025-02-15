@@ -1,9 +1,11 @@
 .pla-collapse {
 	--pla-collapse-header-font-size: 23px;
-	--pla-collaspse-header-text-color: #{lighten(#000, 20%)};
+	--pla-collapse-header-text-color: #{lighten(#000, 20%)};
 	--pla-collapse-header-height: 48px;
-	--pla-collaspse-content-text-color: #{lighten(#000, 40%)};
+	--pla-collapse-content-text-color: #{lighten(#000, 40%)};
 	--pla-collapse-content-font-size: 14px;
+	--pla-collapse-bg-color: var(--pla-bg-color);
+	--pla-collapse-border-color: var(--pla-border-color);
 }
 .pla-collapse {
 	display: flex;
@@ -12,14 +14,14 @@
 	flex-direction: column;
 	padding: 24px;
 	margin: 0.5px;
-	background-color: var(--pla-bg-color);
+	background-color: var(--pla-collapse-bg-color);
 	border: var(--pla-border);
 	font-weight: 500;
 	line-height: 1.5;
 
 	.pla-collapse-item {
 		width: 100%;
-		border-bottom: var(--pla-border);
+		border-bottom: var(--pla-collapse-border-color);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -27,10 +29,10 @@
 		overflow: hidden;
 
 		&:first-child {
-			border-top: var(--pla-border);
+			border-top: var(--pla-collapse-border-color);
 		}
 		&:last-child {
-			border-bottom: var(--pla-border);
+			border-bottom: var(--pla-collapse-border-color);
 		}
 
 		.pla-collapse-item__header {
@@ -41,11 +43,14 @@
 			justify-content: space-between;
 			align-items: center;
 			background-color: var(--pla-bg-color);
-			color: var(--pla-collaspse-header-text-color);
+			color: var(--pla-collapse-header-text-color);
 			cursor: pointer;
 			.pla-collapse-item__icon {
 				width: 24px;
 				height: 24px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				margin-right: 10px;
 				transition: transform var(--pla-transition-duration);
 			}
@@ -60,7 +65,7 @@
 				overflow: hidden;
 				background-color: var(--pla-bg-color);
 				font-weight: 400;
-				color: var(--pla-collaspse-content-text-color);
+				color: var(--pla-collapse-content-text-color);
 				font-size: var(--pla-collapse-content-font-size);
 			}
 		}
@@ -69,7 +74,10 @@
 			.pla-collapse-item__icon {
 				transform: rotate(90deg);
 			}
+		}
 
+		&.is-disabled {
+			--pla-collapse-header-text-color: var(--pla-disabled-text-color);
 		}
 	}
 }

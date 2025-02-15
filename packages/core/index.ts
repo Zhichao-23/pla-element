@@ -1,6 +1,6 @@
-import { makeInstaller } from "@placidity/utils/install";
+import { makeInstaller } from "@pla-element/utils";
 import components from "./components";
-import "@placidity/theme/index.scss";
+import "@pla-element/theme/index.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 

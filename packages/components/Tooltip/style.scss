@@ -1,0 +1,60 @@
+.pla-tooltip {
+	--pla-tooltip-bg-color: var(--pla-bg-color-overlay);
+	--pla-tooltip-font-size: var(--pla-font-size-base);
+	--pla-tooltip-padding: 4px 12px;
+	--pla-tooltip-border: var(--pla-border);
+}
+
+.pla-tooltip {
+	display: inline-block;
+	.pla-tooltip__popper {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		font-size: var(--pla-tooltip-font-size);
+		background-color: var(--pla-tooltip-bg-color);
+		padding: var(--pla-tooltip-padding);
+		border: var(--pla-tooltip-border);
+		box-shadow: var(--pla-box-shadow);
+		border-radius: 4px;
+		cursor: pointer;
+		#arrow,
+		#arrow::before {
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			background: inherit;
+		}
+		#arrow {
+			visibility: hidden;
+		}
+		#arrow::before {
+			visibility: visible;
+			content: "";
+			transform: rotate(45deg);
+		}
+		&[data-popper-placement^="top"] > #arrow {
+			bottom: -4px;
+			border-left: var(--pla-border);
+			border-top: var(--pla-border);
+		}
+
+		&[data-popper-placement^="bottom"] > #arrow {
+			top: -4px;
+			border-bottom: var(--pla-border);
+			border-right: var(--pla-border);
+		}
+
+		&[data-popper-placement^="left"] > #arrow {
+			right: -4px;
+			border-left: var(--pla-border);
+			border-bottom: var(--pla-border);
+		}
+
+		&[data-popper-placement^="right"] > #arrow {
+			left: -4px;
+			border-top: var(--pla-border);
+			border-right: var(--pla-border);
+		}
+	}
+}

@@ -1,15 +1,48 @@
 import vue from "@vitejs/plugin-vue";
 import { defineConfig, type PluginOption } from "vite";
-import dts from "vite-plugin-dts";
+import cpFilePlgin from "./plugins/cp-file-plugin";
+import compression from "vite-plugin-compression2";
+import rmFilesPlugin from "./plugins/rm-files-plugin";
+import terser from "@rollup/plugin-terser";
+
+const isDev = process.env.NODE_ENV === "development";
+const isProd = process.env.NODE_ENV === "production";
+const isTest = process.env.NODE_ENV === "test";
 
 export default defineConfig({
-	plugins: [vue(), dts() as PluginOption],
+	plugins: [
+		vue(),
+		rmFilesPlugin({
+			files: ["dist/umd", "dist/index.css"],
+		}),
+		compression({
+			include: /.(cjs|css)$/i,
+		}) as PluginOption,
+		cpFilePlgin({
+			from: "dist/umd/index.css",
+			to: "dist/index.css",
+		}),
+		terser({
+			compress: {
+				drop_console: isProd && ["log"],
+				drop_debugger: true,
+				passes: 3,
+				global_defs: {
+					"@DEV": JSON.stringify(isDev),
+					"@PROD": JSON.stringify(isProd),
+					"@TEST": JSON.stringify(isTest),
+				},
+			},
+		}),
+	],
+
 	build: {
 		outDir: "dist/umd",
+		minify: false,
 		lib: {
 			entry: "./index.ts",
 			name: "Placidity",
-			fileName: "placidity",
+			fileName: "index",
 			formats: ["umd"],
 		},
 		rollupOptions: {
@@ -18,10 +51,7 @@ export default defineConfig({
 				globals: {
 					vue: "Vue",
 				},
-				assetFileNames: (chunkInfo) => {
-					if (chunkInfo.name == "style.css") return "index.css";
-					return chunkInfo.name || "index.css";
-				},
+				assetFileNames: "index.css",
 			},
 		},
 	},

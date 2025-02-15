@@ -21,11 +21,17 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
+	"types": ["node"],
+	"baseUrl": ".",
+	"paths": {
+		"@placidity/components": ["./packages/components"]
+	},
 	"include": [
 		"packages/core/index.ts",
 		"packages/hooks/**/*.ts",
 		"packages/utils/**/*.ts",
 		"packages/components/**/*.ts",
-		"packages/components/**/*.vue"
-	]
+		"env.d.ts"
+	],
+	"exclude": ["vitest.config.ts"]
 }

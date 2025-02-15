@@ -1,17 +1,13 @@
 {
-	"name": "@placidity/docs",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"dev": "vitepress dev docs",
-		"build": "vitepress build docs",
-		"preview": "vitepress preview docs"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"vitepress": "1.0.0-rc.44"
-	}
+  "name": "@pla-element/docs",
+  "type": "module",
+  "dependencies": {
+    "@vitepress-demo-preview/plugin": "^1.2.3",
+    "vitepress": "1.0.0-rc.44"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  }
 }

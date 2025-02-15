@@ -1,12 +1,13 @@
 {
-	"name": "@placidity/utils",
+	"name": "@pla-element/utils",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
+	"main": "index.ts",
+	"module": "index.ts",
 	"keywords": [],
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"scripts": {
+		"test": "vitest --coverage"
+	}
 }

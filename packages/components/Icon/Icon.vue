@@ -12,7 +12,6 @@ defineOptions({
 const props = withDefaults(defineProps<IconProps>(), {
 	icon: "",
 	color: "#fff",
-	type: "primary",
 });
 const fontawesomeProps = computed(() => omit(props, ["type", "color"]));
 const customStyles = computed(() => ({
@@ -27,6 +26,4 @@ const customStyles = computed(() => ({
 	</i>
 </template>
 
-<style>
-@import "./style.scss";
-</style>
+<style src="./style.scss"></style>

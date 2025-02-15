@@ -1,6 +1,6 @@
 export interface CollapseProps {
 	accordion?: boolean;
-	modelValue: string | string[];
+	modelValue: string[];
 }
 
 export interface CollapseItemProps {
@@ -11,11 +11,11 @@ export interface CollapseItemProps {
 }
 
 export interface CollapseEmits {
-	change: [newActiveNames: string | string[]];
-	"update:modelValue": [activeNames: string | string[]];
+	change: [newActiveNames: string[]];
+	"update:modelValue": [activeNames: string[]];
 }
 
 export interface CollapseContext {
 	handleItemClick: (itemName: string) => void;
-	activeNames: string | string[];
+	activeNames: string[];
 }

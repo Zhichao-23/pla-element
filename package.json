@@ -1,20 +1,22 @@
 {
-	"name": "@placidity/workspace",
+	"name": "@pla-element/workspace",
 	"version": "1.0.0",
-	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"play:dev": "pnpm --filter @placidity/play dev",
-		"docs:dev": "pnpm --filter @placidity/docs dev",
-		"docs:build": "pnpm --filter @placidity/docs build",
-		"test": "pnpm --filter @placidity/components test",
-		"build": "pnpm --filter placidity build"
+		"docs:dev": "pnpm --filter @pla-element/docs dev",
+		"docs:build": "pnpm --filter @pla-element/docs build",
+		"storybook": "pnpm --filter @pla-element/play storybook",
+		"build:dev": "cross-env NODE_ENV=development pnpm --filter pla-element build:watch",
+		"build": "cross-env NODE_ENV=production pnpm --filter pla-element build",
+		"comps:test": "cross-env NODE_ENV=test pnpm --filter @pla-element/components test",
+		"utils:test": "cross-env NODE_ENV=test pnpm --filter @pla-element/utils test",
+		"test": "pnpm comps:test utils:test",
+		"play": "pnpm --filter @pla-element/play play"
 	},
-	"keywords": [],
-	"author": "",
 	"license": "ISC",
 	"workspaces": [
-		"packages/*"
+		"./packages/*",
+		"./_node_modules/*"
 	],
 	"devDependencies": {
 		"@tsconfig/node18": "^18.2.4",
@@ -22,26 +24,32 @@
 		"@types/node": "20.11.20",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"@vitejs/plugin-vue-jsx": "^4.1.1",
-		"@vitest/coverage-v8": "^3.0.4",
 		"@vue/tsconfig": "^0.5.1",
+		"vite-plugin-dts": "^4.5.0",
 		"autoprefixer": "^10.4.20",
+		"cross-env": "^7.0.3",
 		"npm-run-all": "^4.1.5",
 		"postcss-preset-env": "^10.1.3",
 		"sass": "^1.83.4",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.11",
 		"vitest": "^3.0.4",
-		"vue-tsc": "^1.8.27"
+		"vue-tsc": "^1.8.27",
+		"@vitest/coverage-v8": "^3.0.4",
+		"@vue/test-utils": "^2.4.5",
+		"jsdom": "24.0.0"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@fortawesome/vue-fontawesome": "^3.0.8",
+		"pla-element": "workspace:*",
+		"@pla-element/components": "workspace:*",
+		"@pla-element/hooks": "workspace:*",
+		"@pla-element/theme": "workspace:*",
+		"@pla-element/utils": "workspace:*",
+		"vitepress-demo-preview-component": "workspace:*",
 		"lodash-es": "^4.17.21",
-		"@placidity/hooks": "workspace:*",
-		"@placidity/theme": "workspace:*",
-		"@placidity/utils": "workspace:*",
-		"placidity": "workspace:*",
 		"vue": "^3.4.19"
 	}
 }

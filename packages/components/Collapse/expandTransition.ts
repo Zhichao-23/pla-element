@@ -3,25 +3,41 @@ const reset = (el: HTMLElement) => {
 	el.style.overflow = "";
 };
 
+const setOverflowHidden = (el: HTMLElement) => {
+	el.style.overflow = "hidden";
+};
+
+const setHeightScrollHeight = (el: HTMLElement) => {
+	el.style.height = el.scrollHeight + "px";
+};
+
+const setHeightTransition = (el: HTMLElement) => {
+	el.style.transition = "height var(--pla-transition-duration) ease-in-out";
+};
+
+const setHeightZero = (el: HTMLElement) => {
+	el.style.height = "0px";
+};
+
 const expandTransitionEvents = {
 	beforeEnter: (el: HTMLElement): void => {
-		el.style.height = "0px";
-		el.style.overflow = "hidden";
-		el.style.transition = "height var(--pla-transition-duration) ease-in-out";
+		setHeightZero(el);
+		setOverflowHidden(el);
+		setHeightTransition(el);
 	},
 	enter: (el: HTMLElement): void => {
-		el.style.height = el.scrollHeight + "px";
+		setHeightScrollHeight(el);
 	},
 	afterEnter: (el: HTMLElement): void => {
 		reset(el);
 	},
 	beforeLeave: (el: HTMLElement) => {
-		el.style.height = el.scrollHeight + "px";
-		el.style.overflow = "hidden";
-		el.style.transition = "height var(--pla-transition-duration) ease-in-out";
+		setOverflowHidden(el);
+		setHeightTransition(el);
+		setHeightScrollHeight(el);
 	},
 	leave: (el: HTMLElement) => {
-		el.style.height = "0px";
+		setHeightZero(el);
 	},
 	afterLeave: (el: HTMLElement) => {
 		reset(el);
