@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { provide, reactive, ref, toRef, watch, watchEffect } from "vue";
+import { provide, reactive, ref, watch, watchEffect } from "vue";
 import type { CollapseEmits, CollapseProps } from "./types";
 import { COLLASPES_CTX_KEY } from "./contants";
-import { debugWarn } from "@pla-element/utils";
+import {debugWarn, useNamespace} from "@pla-element/utils";
 import { filter, indexOf } from "lodash-es";
 
-const COMP_NAME = "pla-collapse";
+const COMP_NAME = "PlaCollapse";
 
 defineOptions({
 	name: COMP_NAME,
 });
+
+const ns = useNamespace('collapse');
 
 const props = withDefaults(defineProps<CollapseProps>(), {
 	accordion: false,
@@ -76,9 +78,9 @@ const slots = defineSlots();
 </script>
 
 <template>
-	<div class="pla-collapse">
+	<div :class="ns.b()">
 		<slot></slot>
 	</div>
 </template>
 
-<style src="./style.scss"></style>
+<style src="./Collapse.scss"></style>

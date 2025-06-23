@@ -1,6 +1,10 @@
-@use "@pla-element/theme/variables/types.scss" as *;
+@use "@pla-element/theme/mixins/bem";
+@use "@pla-element/theme/mixins/types/diff-types" as t;
+@use "@pla-element/theme/mixins/types/diff-types-plain" as p;
+@use "@pla-element/theme/mixins/types/diff-types-light" as l;
+@use "@pla-element/theme/mixins/types/diff-types-dark" as d;
 
-.pla-alert {
+@include bem.b(alert) {
 	--pla-alert-padding: 8px 16px;
 	--pla-alert-border-radius: 4px;
 	--pla-alert-type: var(--pla-type-primary);
@@ -9,56 +13,43 @@
 	--pla-alert-text-color: #fff;
 }
 
-.pla-alert {
+@include bem.b(alert){
 	padding: var(--pla-alert-padding);
 	background-color: var(--pla-alert-bg-color);
 	border: var(--pla-border);
 	border-color: var(--pla-alert-border-color);
 	border-radius: var(--pla-alert-border-radius);
-	display: flex;
 	color: var(--pla-alert-text-color);
 
-	.pla-alert__content {
+	display: flex;
+	position: relative;
+
+	@include bem.e('content'){
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-
-		.pla-alert__title {
-			font-size: 18px;
-		}
-
-		.pla-alert__description {
-			font-size: 14px;
-		}
-
-		&.is-center {
-			justify-content: center;
-		}
+		align-content: center;
+	}
+	@include bem.e('title') {
+		font-size: 18px;
+		text-align: center;
+	}
+	@include bem.e('description') {
+		font-size: 14px;
+		text-align: center;
+	}
+	@include bem.s('center') {
+		justify-content: center;
 	}
 
-	.pla-alert__close-icon {
-		margin-left: auto;
-		align-self: baseline;
+	@include bem.e('close-icon') {
+		position: absolute;
+		left: 100%;
+		transform: translate(-15px, -5px);
 	}
 
-	&.is-dark {
-		@each $type in $types {
-			&.pla-alert--#{$type} {
-				--pla-alert-bg-color: var(--pla-color-#{$type});
-				--pla-alert-border-color: var(--pla-color-#{$type});
-			}
-		}
-	}
-
-	&.is-light {
-		@each $type in $types {
-			&.pla-alert--#{$type} {
-				--pla-alert-text-color: var(--pla-color-#{$type});
-				--pla-alert-bg-color: var(--pla-color-#{$type}-7);
-				--pla-alert-border-color: var(--pla-color-#{$type});
-			}
-		}
-	}
+	@include l.diff-types-light('alert');
+	@include d.diff-types-dark('alert');
 
 	.pla-alert-move {
 		transition: var(--pla-transition-duration);

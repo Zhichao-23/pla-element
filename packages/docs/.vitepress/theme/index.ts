@@ -3,6 +3,7 @@ import { ElementPlusContainer } from "vitepress-demo-preview-component";
 import "vitepress-demo-preview-component/_product/style.css";
 import "pla-element/dist/index.css";
 import plaElement from "pla-element";
+import type { App } from "vue";
 
 export default {
 	...DefaultTheme,

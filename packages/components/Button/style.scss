@@ -1,6 +1,6 @@
-@use "@pla-element/theme/variables/types.scss" as *;
-@use "@pla-element/theme/variables/states.scss" as *;
-.pla-button {
+@use "@pla-element/theme/mixins/types/diff-types-all" as all;
+@use "@pla-element/theme/mixins/bem";
+@include bem.b('button') {
 	--pla-button-text-color: #fff;
 	--pla-button-border-color: var(--pla-color-primary);
 	--pla-button-bg-color: var(--pla-color-primary);
@@ -10,7 +10,7 @@
 	--pla-button-border-radius: 4px;
 }
 
-.pla-button {
+@include bem.b('button') {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -37,64 +37,32 @@
 		margin-left: 8px;
 	}
 
-	@each $type in $types {
-		&.pla-button--#{$type} {
-			--pla-button-bg-color: var(--pla-color-#{$type});
-			--pla-button-border-color: var(--pla-color-#{$type});
-			&:hover {
-				--pla-button-bg-color: var(--pla-color-#{$type}-3);
-				--pla-button-border-color: var(--pla-color-#{$type}-3);
-			}
-			&:active {
-				--pla-button-bg-color: var(--pla-color-#{$type}-dark-2);
-				--pla-button-border-color: var(--pla-color-#{$type}-dark-2);
-			}
-			&:disabled {
-				--pla-button-bg-color: var(--pla-color-#{$type}-8);
-				--pla-button-border-color: var(--pla-color-#{$type}-8);
-				color: var(--pla-disabled-text-color);
-			}
-			&.is-plain {
-				--pla-button-text-color: var(--pla-color-#{$type});
-				--pla-button-bg-color: var(--pla-color-#{$type}-7);
-				--pla-button-border-color: var(--pla-color-#{$type});
-				&:hover {
-					--pla-button-text-color: #fff;
-					--pla-button-bg-color: var(--pla-color-#{$type});
-					--pla-button-border-color: var(--pla-color-#{$type});
-				}
-				&:active {
-					--pla-button-text-color: #fff;
-					--pla-button-bg-color: var(--pla-color-#{$type}-dark-2);
-					--pla-button-border-color: var(--pla-color-#{$type});
-				}
-			}
-		}
-	}
-	&.pla-button--small {
+	@include all.diff-types-all(button);
+
+	@include bem.m('small') {
 		--pla-button-height: 24px;
 		--pla-button-padding: 4px 12px;
 		--pla-font-size: 12px;
 		--pla-button-border-radius: 2px;
 	}
 
-	&.pla-button--large {
+	@include bem.m('large') {
 		--pla-button-height: 40px;
 		--pla-button-padding: 4px 12px;
 		--pla-font-size: 14px;
 		--pla-button-border-radius: 6px;
 	}
 
-	&.is-round {
+	@include bem.s('round') {
 		border-radius: 4px;
 	}
 
-	&.is-circle {
+	@include bem.s('circle') {
 		border-radius: 50%;
 	}
 
-	&.is-loading {
-		.pla-button__loading-icon {
+	@include bem.s('loading') {
+		@include bem.e('loading-icon') {
 			animation: loading 1s infinite linear;
 		}
 	}
@@ -109,11 +77,11 @@
 	}
 }
 
-.pla-button-group {
+@include bem.b('button-group'){
 	display: inline-block;
 	justify-content: center;
 	align-items: center;
-	.pla-button {
+	@include bem.b('button') {
 		border-radius: 0;
 		margin-left: 0 !important;
 		&:first-child {

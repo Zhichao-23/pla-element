@@ -8,3 +8,5 @@ export const typeIconMap = new Map([
 
 export * from "./src/install";
 export * from "./src/warn";
+export * from "./src/useNamespace";
+export * from "./src/RenderVnode"

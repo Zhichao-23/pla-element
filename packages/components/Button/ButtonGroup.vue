@@ -4,15 +4,15 @@ import { BUTTON_GROUP_CXT_KEY } from "./constants";
 import type { ButtonGroupContext, ButtonGroupProps } from "./types";
 
 defineOptions({
-	name: "pla-button-group",
+	name: "PlaBbuttonGroup",
 });
 
 const props = defineProps<ButtonGroupProps>();
 
 const context: ButtonGroupContext = reactive({
-	size: toRef(props.size),
-	type: toRef(props.type),
-	disabled: toRef(props.disabled),
+	size: toRef(props, 'size'),
+	type: toRef(props, 'type'),
+	disabled: toRef(props, 'disabled'),
 });
 
 provide(BUTTON_GROUP_CXT_KEY, context);

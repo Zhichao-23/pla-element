@@ -11,7 +11,7 @@
 		"comps:test": "cross-env NODE_ENV=test pnpm --filter @pla-element/components test",
 		"utils:test": "cross-env NODE_ENV=test pnpm --filter @pla-element/utils test",
 		"test": "pnpm comps:test utils:test",
-		"play": "pnpm --filter @pla-element/play play"
+		"examples": "pnpm --filter @pla-element/examples dev"
 	},
 	"license": "ISC",
 	"workspaces": [
@@ -24,32 +24,32 @@
 		"@types/node": "20.11.20",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"@vitejs/plugin-vue-jsx": "^4.1.1",
+		"@vitest/coverage-v8": "^3.0.6",
+		"@vue/test-utils": "^2.4.6",
 		"@vue/tsconfig": "^0.5.1",
-		"vite-plugin-dts": "^4.5.0",
 		"autoprefixer": "^10.4.20",
 		"cross-env": "^7.0.3",
+		"jsdom": "24.0.0",
 		"npm-run-all": "^4.1.5",
-		"postcss-preset-env": "^10.1.3",
-		"sass": "^1.83.4",
+		"postcss-preset-env": "^10.1.4",
+		"sass": "^1.85.0",
 		"typescript": "^5.7.3",
-		"vite": "^6.0.11",
-		"vitest": "^3.0.4",
-		"vue-tsc": "^1.8.27",
-		"@vitest/coverage-v8": "^3.0.4",
-		"@vue/test-utils": "^2.4.5",
-		"jsdom": "24.0.0"
+		"vite": "^6.1.1",
+		"vite-plugin-dts": "^4.5.0",
+		"vitest": "^3.0.6",
+		"vue-tsc": "^1.8.27"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@fortawesome/vue-fontawesome": "^3.0.8",
-		"pla-element": "workspace:*",
 		"@pla-element/components": "workspace:*",
-		"@pla-element/hooks": "workspace:*",
 		"@pla-element/theme": "workspace:*",
 		"@pla-element/utils": "workspace:*",
-		"vitepress-demo-preview-component": "workspace:*",
+		"@pla-element/hooks": "workspace:*",
 		"lodash-es": "^4.17.21",
-		"vue": "^3.4.19"
+		"pla-element": "workspace:*",
+		"vitepress-demo-preview-component": "workspace:*",
+		"vue": "^3.5.13"
 	}
 }

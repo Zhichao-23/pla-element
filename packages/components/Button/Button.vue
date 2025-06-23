@@ -9,9 +9,10 @@ import type {
 	ButtonInstance,
 	ButtonGroupContext,
 } from "./types";
+import { useNamespace } from "@pla-element/utils";
 
 defineOptions({
-	name: "pla-button",
+	name: "PlaButton",
 });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -27,6 +28,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 	loading: false,
 	autofocus: false,
 });
+
+const ns = useNamespace("button");
 
 const emits = defineEmits<ButtonEmits>();
 const handleClick = (evt: MouseEvent) => emits("click", evt);
@@ -54,43 +57,25 @@ defineExpose<ButtonInstance>({
 </script>
 
 <template>
-	<component
-		:is="props.tag"
-		ref="button"
-		class="pla-button"
-		:type="props.tag == 'button' ? props.nativeType : void 0"
-		:disabled="disabled || props.loading ? true : void 0"
-		:autofocus="autofocus"
-		:style="iconStyle"
-		:class="[
-			`pla-button--${type}`,
-			`pla-button--${size}`,
+	<component :is="props.tag" ref="button" class="pla-button" :type="props.tag == 'button' ? props.nativeType : void 0"
+		:disabled="disabled || props.loading ? true : void 0" :autofocus="autofocus" :class="[
+			`${ns.m(type, '')}`,
+			`${ns.m(size, '')}`,
 			{
-				'is-plain': plain,
-				'is-round': round,
-				'is-circle': circle,
-				'is-disabled': disabled,
-				'is-loading': loading,
+				[`${ns.is('plain')}`]: plain,
+				[`${ns.is('round')}`]: round,
+				[`${ns.is('circle')}`]: circle,
+				[`${ns.is('disabled')}`]: disabled,
+				[`${ns.is('loading')}`]: loading,
 			},
-		]"
-		@click="(evt: MouseEvent) => {props.useThrottle ? handleClickThrottle(evt) : handleClick(evt)}"
-	>
+		]" @click="(evt: MouseEvent) => { props.useThrottle ? handleClickThrottle(evt) : handleClick(evt) }">
 		<template v-if="props.loading">
 			<slot name="loading">
-				<pla-icon
-					:icon="props.icon ?? 'spinner'"
-					:style="iconStyle"
-					size="1x"
-					:class="{ 'pla-button__loading-icon': loading }"
-				/>
+				<pla-icon :icon="props.icon ?? 'spinner'" :style="iconStyle" size="1x"
+					:class="{ [`${ns.e('Loading-icon')}`]: loading }" />
 			</slot>
 		</template>
-		<pla-icon
-			v-if="!props.loading && props.icon"
-			:icon="props.icon"
-			:style="iconStyle"
-			size="1x"
-		/>
+		<pla-icon v-if="!props.loading && props.icon" :icon="props.icon" :style="iconStyle" size="1x" />
 		<slot></slot>
 	</component>
 </template>

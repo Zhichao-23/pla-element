@@ -1,0 +1,13 @@
+@use "../../variables/types" as *;
+
+@mixin diff-types-plain-hover($name) {
+  @each $type in $types {
+    &.pla-#{$name}--#{$type}.is-plain {
+      &:hover {
+        --pla-#{$name}-text-color: #fff;
+        --pla-#{$name}-bg-color: var(--pla-color-#{$type});
+        --pla-#{$name}-border-color: var(--pla-color-#{$type});
+      }
+    }
+  }
+}

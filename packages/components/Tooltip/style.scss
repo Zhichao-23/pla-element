@@ -1,7 +1,7 @@
 .pla-tooltip {
 	--pla-tooltip-bg-color: var(--pla-bg-color-overlay);
 	--pla-tooltip-font-size: var(--pla-font-size-base);
-	--pla-tooltip-padding: 4px 12px;
+	--pla-tooltip-padding: 6px 0px;
 	--pla-tooltip-border: var(--pla-border);
 }
 
@@ -23,6 +23,8 @@
 			position: absolute;
 			width: 8px;
 			height: 8px;
+			border-top: var(--pla-tooltip-border);
+			border-left: var(--pla-tooltip-border);
 			background: inherit;
 		}
 		#arrow {

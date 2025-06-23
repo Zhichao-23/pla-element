@@ -4614,7 +4614,7 @@ var KeepAliveImpl = {
   name: `KeepAlive`,
   // Marker for special handling inside the renderer. We are not using a ===
   // check directly on KeepAlive in the renderer, because importing it directly
-  // would prevent it from being tree-shaken.
+  // would prevent it from being Tree-shaken.
   __isKeepAlive: true,
   props: {
     include: [String, RegExp, Array],
@@ -8829,7 +8829,7 @@ var isSuspense = (type) => type.__isSuspense;
 var suspenseId = 0;
 var SuspenseImpl = {
   name: "Suspense",
-  // In order to make Suspense tree-shakable, we need to avoid importing it
+  // In order to make Suspense Tree-shakable, we need to avoid importing it
   // directly in the renderer. The renderer checks for the __isSuspense flag
   // on a vnode's type and calls the `process` method, passing in renderer
   // internals.
@@ -8915,7 +8915,7 @@ function mountSuspense(vnode, container, anchor, parentComponent, parentSuspense
       anchor,
       parentComponent,
       null,
-      // fallback tree will not have suspense context
+      // fallback Tree will not have suspense context
       namespace,
       slotScopeIds
     );
@@ -8956,7 +8956,7 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, namespace, sl
             anchor,
             parentComponent,
             null,
-            // fallback tree will not have suspense context
+            // fallback Tree will not have suspense context
             namespace,
             slotScopeIds,
             optimized
@@ -8997,7 +8997,7 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, namespace, sl
             anchor,
             parentComponent,
             null,
-            // fallback tree will not have suspense context
+            // fallback Tree will not have suspense context
             namespace,
             slotScopeIds,
             optimized
@@ -9223,7 +9223,7 @@ function createSuspenseBoundary(vnode, parentSuspense, parentComponent, containe
           anchor2,
           parentComponent2,
           null,
-          // fallback tree will not have suspense context
+          // fallback Tree will not have suspense context
           namespace2,
           slotScopeIds,
           optimized

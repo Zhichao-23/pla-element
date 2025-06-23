@@ -1,0 +1,9 @@
+@use "./diff-types-plain" as p;
+@use "./diff-types-plain-active" as a;
+@use "./diff-types-plain-hover" as h;
+
+@mixin diff-types-plain-all($name) {
+  @include p.diff-types-plain($name);
+  @include a.diff-types-plain-active($name);
+  @include h.diff-types-plain-hover($name);
+}

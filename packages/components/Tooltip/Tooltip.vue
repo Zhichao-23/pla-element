@@ -2,13 +2,15 @@
 import { computed, reactive, ref, useTemplateRef, watch } from "vue";
 import type { TooltipProps, TooltipEmits, TooltipInstance } from "./types";
 import { createPopper, type Instance } from "@popperjs/core";
-import { useClickOutside } from "@pla-element/utils/src/useClickOutside";
-import { debounce } from "lodash-es";
+import { useClickOutside } from "@pla-element//hooks";
+import { debounce } from 'lodash-es';
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: "bottom",
   trigger: "hover",
   transition: "fade",
+  manual: false,
+  disabled: false,
   showDelay: 100,
   hideDelay: 100
 });
@@ -27,7 +29,7 @@ let outerEvents: Record<string, EventListener> = reactive({});
 const popperOptions = computed(() => ({
   placement: props.placement,
   ...props.popperOptions
-}))
+}));
 // 实现popper的弹出和销毁
 watch(visible, (newVal) => {
   if (newVal) {
@@ -68,7 +70,7 @@ const hideFinal = () => {
   showWithDebounce.cancel();
   hideWithDebounce();
 }
-const handleClick = () => {
+const handleClicked = () => {
   if (visible.value) {
     hideFinal();
   } else {
@@ -77,6 +79,12 @@ const handleClick = () => {
   emits("visible-change", visible.value);
 }
 const attachEvents = () => {
+  console.log('aaa');
+  events = reactive({});
+  outerEvents = reactive({});
+  if (props.manual) {
+    return;
+  }
   if (props.trigger == "hover") {
     events["mouseenter"] = () => {
       showFinal();
@@ -87,12 +95,10 @@ const attachEvents = () => {
     return;
   }
 
-  events["click"] = handleClick;
+  events["click"] = handleClicked;
 }
 watch(() => props.trigger, (newVal, oldVal) => {
-  if (newVal == oldVal) return;
-  events = reactive({});
-  outerEvents = reactive({});
+  if (newVal == oldVal || props.disabled) return;
   attachEvents();
 }, { immediate: true });
 
@@ -103,12 +109,15 @@ useClickOutside(containerNode, () => {
   hideFinal();
 });
 
+
 // 实现用户定义展示和隐藏
 defineExpose<TooltipInstance>({
   show: showFinal,
-  hide: hideFinal
+  hide: hideFinal,
+  get visible() {
+    return visible.value
+  }
 });
-
 </script>
 
 <template>

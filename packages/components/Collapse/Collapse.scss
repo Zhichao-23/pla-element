@@ -1,0 +1,13 @@
+@use "@pla-element/theme/mixins/bem";
+
+@include bem.b('collapse') {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px;
+  margin: 0.5px;
+  border: var(--pla-border);
+  font-weight: 500;
+  line-height: 1.5;
+}

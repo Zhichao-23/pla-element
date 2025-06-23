@@ -1,0 +1,10 @@
+@use "../../variables/types" as *;
+
+@mixin diff-types($name) {
+  @each $type in $types {
+    &.pla-#{$name}--#{$type} {
+      --pla-#{$name}-bg-color: var(--pla-color-#{$type});
+      --pla-#{$name}-border-color: var(--pla-color-#{$type});
+    }
+  }
+}

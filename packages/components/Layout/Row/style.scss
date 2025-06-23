@@ -1,0 +1,24 @@
+.pla-row{
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  &.is-justify-center {
+    justify-content: center;
+  }
+  &.is-justify-start {
+    justify-content: start;
+  }
+  &.is-justify-end {
+    justify-content: end;
+  }
+  &.is-justify-space-between {
+    justify-content: space-between;
+  }
+  &.is-justify-space-around {
+    justify-content: space-around;
+  }
+  &.is-justify-space-evenly {
+    justify-content: space-evenly;
+  }
+}

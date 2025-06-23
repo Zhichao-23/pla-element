@@ -41,7 +41,7 @@ export default defineConfig({
 		minify: false,
 		lib: {
 			entry: "./index.ts",
-			name: "Placidity",
+			name: "pla-element",
 			fileName: "index",
 			formats: ["umd"],
 		},

@@ -1,0 +1,52 @@
+@use "sass:string";
+
+$ns: 'pla';
+$block-separator: '-';
+$element-separator: '__';
+$modifier-separator: '--';
+$modifier-value-separator: '_';
+$state-prefix: 'is-';
+
+$b: null;
+
+@mixin b($block) {
+  $b: $ns + $block-separator + $block !global;
+  .#{$b} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $e: $b + $element-separator + $element;
+  @at-root {
+    .#{$e} {
+      @content;
+    }
+  }
+}
+
+@mixin m($attr, $val: null) {
+  // 根据 $val 是否为空值来决定拼接的内容
+  $m: null;
+  @if $val {
+    $m: $b + $modifier-separator + $attr + $modifier-value-separator + $val;
+  } @else {
+    $m: $b + $modifier-separator + $attr;
+  }
+  @at-root {
+    .#{$m} {
+      @content;
+    }
+  }
+}
+
+@mixin s($attrs, $and: true) {
+  $state: '';
+  @each $attr in $attrs {
+    $state: if($and, '&', '') + '.' + $state-prefix + $attr + ', ' + $state;
+  }
+  $state: string.slice($state, 1, -2);
+  #{$state} {
+    @content;
+  }
+}

@@ -5,10 +5,13 @@ import { COLLASPES_CTX_KEY } from "./contants";
 import { includes } from "lodash-es";
 import PlaIcon from "../Icon/Icon.vue";
 import expandTransitionEvents from "./expandTransition";
+import {useNamespace} from "@pla-element/utils";
 
 defineOptions({
-	name: "pla-collapse-item",
+	name: "PlaCollapseItem",
 });
+
+const ns = useNamespace('collapse-item');
 
 const props = withDefaults(defineProps<CollapseItemProps>(), {
 	title: "",
@@ -31,31 +34,25 @@ const slots = defineSlots();
 
 <template>
 	<div
-		class="pla-collapse-item"
-		:class="{
-			'is-disabled': disabled,
-			'is-active': isActive,
-		}"
-	>
-		<div class="pla-collapse-item__header" @click="handleClick">
+    :class="[
+      `${ns.b()}`,
+      {
+      [ns.is('disabled')]: disabled,
+      [ns.is('active')]: isActive,
+      }]">
+		<div :class="ns.e('header')" @click="handleClick">
 			<slot name="title">{{ title }}</slot>
-			<pla-icon
-				:icon="icon"
-				class="pla-collapse-item__icon"
-				v-if="icon"
-			></pla-icon>
-			<pla-icon
-				icon="angle-right"
-				class="pla-collapse-item__icon"
-				v-else
-			></pla-icon>
+			<pla-icon :icon="icon" :class="ns.e('left-icon')" v-if="icon"></pla-icon>
+			<pla-icon icon="angle-right" :class="ns.e('right-icon')" size="2xs" v-else></pla-icon>
 		</div>
 		<transition name="expand" v-on="expandTransitionEvents">
-			<div class="pla-collapse__body" v-show="isActive">
-				<div class="pla-collapse-item__content" :id="`item-content-${name}`">
+			<div :class="ns.e('body')" v-show="isActive">
+				<div :class="ns.e('content')" :id="`item-content-${name}`">
 					<slot></slot>
 				</div>
 			</div>
 		</transition>
 	</div>
 </template>
+
+<style src="./CollapseItem.scss"></style>

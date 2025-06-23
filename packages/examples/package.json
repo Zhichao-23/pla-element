@@ -1,0 +1,6 @@
+{
+  "name": "@pla-element/examples",
+  "scripts": {
+    "dev": "vite"
+  }
+}

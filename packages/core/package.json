@@ -1,7 +1,7 @@
 {
 	"name": "pla-element",
 	"version": "1.0.0",
-	"description": "components libary by vue + ts",
+	"description": "components library by vue + ts",
 	"type": "module",
 	"main": "./dist/umd/index.cjs",
 	"module": "./dist/es/index.js",
@@ -34,14 +34,6 @@
 	"keywords": [],
 	"author": "Zhichao Liu",
 	"license": "ISC",
-	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^6.7.2",
-		"@fortawesome/free-solid-svg-icons": "^6.7.2",
-		"@fortawesome/vue-fontawesome": "^3.0.8",
-		"@popperjs/core": "^2.11.8",
-		"async-validator": "^4.2.5",
-		"lodash-es": "^4.17.21"
-	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
 		"@types/shelljs": "^0.8.15",
@@ -51,6 +43,12 @@
 		"vitepress": "1.0.0-rc.44"
 	},
 	"peerDependencies": {
-		"vue": "^3.4.19"
+		"vue": "^3.4.19",
+		"@fortawesome/fontawesome-svg-core": "^6.7.2",
+		"@fortawesome/free-solid-svg-icons": "^6.7.2",
+		"@fortawesome/vue-fontawesome": "^3.0.8",
+		"@popperjs/core": "^2.11.8",
+		"async-validator": "^4.2.5",
+		"lodash-es": "^4.17.21"
 	}
 }

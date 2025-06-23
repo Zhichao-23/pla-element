@@ -3,11 +3,12 @@ import type { AlertEmits, AlertProps } from "./types";
 import PlaIcon from "../Icon/Icon.vue";
 import { computed, ref, useTemplateRef } from "vue";
 import { typeIconMap } from "@pla-element/utils";
+import { useNamespace } from "@pla-element/utils/src/useNamespace";
 
 defineOptions({
-	name: "pla-alert",
+	name: "PlaAlert",
 });
-
+const ns = useNamespace("alert");
 const visible = ref<boolean>(true);
 
 const props = withDefaults(defineProps<AlertProps>(), {
@@ -26,6 +27,12 @@ const slots = defineSlots();
 
 const hasDesc = computed(() => !!slots.default || !!props.description);
 
+const descriptionStyle = computed(() => {
+	return {
+		margin: props.title ? '14px 0 0' : '0px'
+	};
+});
+
 const handleClose = (e: MouseEvent) => {
 	visible.value = false;
 	emits("close", e);
@@ -38,44 +45,30 @@ defineExpose({
 });
 </script>
 
-<template v-if="visible" name="pla-alert">
+<template>
 	<transition>
-		<div
-			class="pla-alert"
-			:class="[
-				`is-${effect}`,
-				`pla-alert--${type}`,
-				{
-					'is-center': center,
-				},
-			]"
-			v-if="visible"
-		>
-			<pla-icon
-				:icon="iconName"
-				size="3x"
-				:style="{ marginRight: '10px' }"
-				v-if="showIcon"
-			></pla-icon>
-			<div class="pla-alert__content">
-				<span class="pla-alert__title">
+		<div :class="[
+			ns.b(),
+			ns.is(effect),
+			ns.m(type, ''),
+			{
+				[ns.is('center')]: center
+			}]" v-if="visible">
+			<pla-icon :icon="iconName" size="3x" :style="{ marginRight: '10px' }" :type="type" v-if="showIcon"></pla-icon>
+			<div :class="ns.e('content')">
+				<span :class="ns.e('title')">
 					<slot name="title">
 						{{ title }}
 					</slot>
 				</span>
-				<p class="pla-alert__description" v-if="hasDesc">
+				<p :class="ns.e('description')" v-if="hasDesc" :style="descriptionStyle">
 					<slot>
 						{{ description }}
 					</slot>
 				</p>
 			</div>
-			<pla-icon
-				icon="xmark"
-				size="1x"
-				@click.stop="handleClose"
-				class="pla-alert__close-icon"
-				v-if="closable"
-			></pla-icon>
+			<pla-icon icon="xmark" size="1x" @click.stop="handleClose" :class="ns.e('close-icon')" :type="type"
+				v-if="closable"></pla-icon>
 		</div>
 	</transition>
 </template>

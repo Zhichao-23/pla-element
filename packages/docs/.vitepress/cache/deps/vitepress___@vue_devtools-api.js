@@ -2711,7 +2711,7 @@ function addInspector(inspector, descriptor) {
   devtoolsInspector.push({
     options: inspector,
     descriptor,
-    treeFilterPlaceholder: (_a25 = inspector.treeFilterPlaceholder) != null ? _a25 : "Search tree...",
+    treeFilterPlaceholder: (_a25 = inspector.treeFilterPlaceholder) != null ? _a25 : "Search Tree...",
     stateFilterPlaceholder: (_b25 = inspector.stateFilterPlaceholder) != null ? _b25 : "Search state...",
     treeFilter: "",
     selectedNodeId: "",
@@ -3481,7 +3481,7 @@ function normalizeRouterInfo(appRecord, activeAppRecord2) {
 }
 function createDevToolsApi(hooks2) {
   return {
-    // get inspector tree
+    // get inspector Tree
     async getInspectorTree(payload) {
       const _payload = {
         ...payload,

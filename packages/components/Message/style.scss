@@ -1,0 +1,39 @@
+@use "@pla-element/theme/mixins/types/diff-types-plain" as plain;
+
+.pla-message {
+	--pla-message-bg-color: var(--pla-bg-color);
+	--pla-message-text-color: var(--pla-text-color-regular);
+	--pla-message-border-color: var(--pla-message-border-color);
+}
+
+.pla-message {
+	position: fixed;
+	margin: 0 auto;
+	box-sizing: border-box;
+	height: 35px;
+	padding: 4px 12px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+	background-color: var(--pla-message-bg-color);
+	color: var(--pla-message-text-color);
+	border: var(--pla-message-border-color);
+	border-radius: 4px;
+	transition: top var(--pla-transition-duration) ease;
+
+	@include plain.diff-types-plain(message);
+
+	&.fade-enter-from,
+	&.fade-leave-to {
+		opacity: 0;
+		margin-top: -50px;
+	}
+
+	&.fade-enter-active,
+	&.fade-leave-active {
+		transition: all .3s ease;
+	}
+}

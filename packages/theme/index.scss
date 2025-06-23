@@ -1,2 +1,2 @@
-@use "reset.scss" as *;
-@use "./variables/variables.scss" as *;
+@forward "reset.scss";
+@forward "variables/variables";

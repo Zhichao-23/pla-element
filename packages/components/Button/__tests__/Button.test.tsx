@@ -86,8 +86,8 @@ describe("Button.vue", () => {
 		vi.useRealTimers();
 	});
 
-	// 测试 loading 状态
-	it("renders loading icon when loading is true", () => {
+	// 测试 Loading 状态
+	it("renders Loading icon when Loading is true", () => {
 		const wrapper = mount(Button, {
 			props: { loading: true },
 		});

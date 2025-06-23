@@ -1,0 +1,42 @@
+.pla-input {
+  --pla-input-height: 32px;
+}
+.pla-input {
+  vertical-align: middle;
+  height: var(--pla-input-height, 32px);
+  cursor: text;
+  position: relative;
+  .pla-input__wrapper {
+    display: inline-flex;
+    height: var(--pla-input-height);
+    width: 100%;
+    box-sizing: border-box;
+    border: 1.5px solid var(--pla-border-color-dark);
+    border-radius: 4px;
+    padding: 1px 11px;
+    transition: box-shadow .2s cubic-bezier(.645, .045, .355, 1);
+    &.is-focus {
+      border: 1.5px transparent solid;
+      box-shadow: 0 0 0 1px var(--pla-color-primary) inset;
+      transform: translateZ(0px);
+    }
+    
+    .pla-input__inner:focus {
+      outline: none;
+    }
+    .pla-input__inner {
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      &::placeholder {
+        color: var(--pla-text-color-placeholder)
+      }
+    }
+  }
+  input[type="password"]::-webkit-eye-icon {
+      display: none;
+    }
+  input[type="password"]::-ms-reveal {
+    display: none;
+  }
+}

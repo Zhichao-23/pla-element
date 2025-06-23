@@ -1,0 +1,13 @@
+@use "diff-types-active" as a;
+@use "diff-types-disabled" as d;
+@use "diff-types-hover" as h;
+@use "diff-types-plain-all" as p;
+@use "diff-types" as t;
+
+@mixin diff-types-all($name) {
+	@include t.diff-types($name);
+	@include p.diff-types-plain-all($name);
+	@include h.diff-types-hover($name);
+	@include a.diff-types-active($name);
+	@include d.diff-types-disabled($name);
+}

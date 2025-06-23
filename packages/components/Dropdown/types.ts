@@ -3,6 +3,7 @@ import type { TooltipEmits, TooltipProps } from "../Tooltip/types";
 
 export interface DropdownProps extends TooltipProps {
 	menuOptions?: MenuOption[];
+	disabled?: boolean;
 }
 
 export interface DropdownEmits extends TooltipEmits {
@@ -10,8 +11,8 @@ export interface DropdownEmits extends TooltipEmits {
 }
 
 export interface MenuOption {
-	label?: string | VNode;
 	key: any;
+	label?: string | VNode;
 	disabled?: boolean;
 	divided?: boolean;
 }
